@@ -19,9 +19,11 @@
   "homepage": "https://github.com/mcnugboy/project-2-social-app#readme",
   "dependencies": {
     "bulma": "^0.9.4",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "font-awesome": "^4.7.0",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "sequelize": "^6.21.3"
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
