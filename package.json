@@ -2,10 +2,10 @@
   "name": "project-2-social-app",
   "version": "1.0.0",
   "description": "A spotify favorites tracker.",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "express-session": "^1.17.3",
     "font-awesome": "^4.7.0",
     "handlebars": "^4.7.7",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.21.3"
   },
   "devDependencies": {
