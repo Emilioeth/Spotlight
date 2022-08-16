@@ -8,7 +8,7 @@ class User extends Model {
   }
 }
 
-// creates the users model, maybe we add encyrption using bcrypt?
+// creates the users model
 User.init(
     {
       id: {
