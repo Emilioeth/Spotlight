@@ -22,8 +22,8 @@ Favorites.init(
                 isURL: true
             }
         },
-        user_id: {
-            type: DataTypes.STRING,
+        owner_id: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id'
