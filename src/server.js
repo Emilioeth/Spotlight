@@ -20,11 +20,11 @@ const sess = {
 };
 
 sequelize.sync({ force: false }).then(() => {
-  
-  app.engine('handlebars', engine());
+  const _engine = engine()
+  app.engine('handlebars', _engine);
   app.set('view engine', 'handlebars');
   app.set('views', './src/views');
-  
+
   app.use(session(sess));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
