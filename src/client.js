@@ -7,7 +7,7 @@ function entry() {
     const registerButton = document.querySelector("#registerButton")
 
     if (loginButton) {
-        loginButton.on('click',() => {
+        loginButton.click(() => {
             axios({
                 method: 'post',
                 url: '/user/12345',
@@ -19,7 +19,7 @@ function entry() {
         })
     }
     if (registerButton) {
-        registerButton.on('click',() => {
+        registerButton.click(() => {
             
         })
     }

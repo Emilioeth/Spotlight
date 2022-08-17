@@ -3093,7 +3093,7 @@ function entry() {
     const registerButton = document.querySelector("#registerButton")
 
     if (loginButton) {
-        loginButton.on('click',() => {
+        loginButton.click(() => {
             axios__WEBPACK_IMPORTED_MODULE_1___default()({
                 method: 'post',
                 url: '/user/12345',
@@ -3105,7 +3105,7 @@ function entry() {
         })
     }
     if (registerButton) {
-        registerButton.on('click',() => {
+        registerButton.click(() => {
             
         })
     }
