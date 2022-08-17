@@ -25,11 +25,11 @@ sequelize.sync({ force: false }).then(() => {
   app.set('view engine', 'handlebars');
   app.set('views', './src/views');
 
+  app.use(express.static('src/dist'))
   app.use(session(sess));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(routes);
-  app.use(express.static('public'))
   
 
   app.listen(PORT, () => console.log('Now listening'));
