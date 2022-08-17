@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Favorites } = require('../../models');
 
 // get all users
-router.get('/', (req, res) => {
+router.get('/users', (req, res) => {
     User.findAll({
       attributes: { exclude: ['password'] }
     })
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   });
 
   //Get single User
-  router.get('/:id', (req, res) => {
+  router.get('/users/:id', (req, res) => {
     User.findOne({
       attributes: { exclude: ['password'] },
       where: {
@@ -64,6 +64,7 @@ router.get('/', (req, res) => {
 
   //Useer Log-in
   router.post('/login', (req, res) => {
+    console.log("hit /login")
     User.findOne({
       where: {
         email: req.body.email
@@ -104,7 +105,7 @@ router.get('/', (req, res) => {
   });
 
   //Delete a User
-  router.delete('/:id', (req, res) => {
+  router.delete('/users/:id', (req, res) => {
     User.destroy({
       where: {
         id: req.params.id

@@ -3091,22 +3091,31 @@ function entry() {
     
     const loginButton = document.querySelector("#loginButton")
     const registerButton = document.querySelector("#registerButton")
+    const userNameBox = document.querySelector('#username')
+    const pwBox = document.querySelector('#password')
 
     if (loginButton) {
-        loginButton.click(() => {
+        loginButton.addEventListener("click",() => {
             axios__WEBPACK_IMPORTED_MODULE_1___default()({
                 method: 'post',
-                url: '/user/12345',
+                url: '/login',
                 data: {
-                  firstName: 'Fred',
-                  lastName: 'Flintstone'
+                  email: userNameBox.value,
+                  password: pwBox.value
                 }
               });
         })
     }
     if (registerButton) {
-        registerButton.click(() => {
-            
+        registerButton.addEventListener("click",() => {
+            axios__WEBPACK_IMPORTED_MODULE_1___default()({
+                method: 'post',
+                url: '/register',
+                data: {
+                  email: userNameBox.value,
+                  password: pwBox.value
+                }
+              });
         })
     }
 }
