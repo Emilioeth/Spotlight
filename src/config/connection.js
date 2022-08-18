@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 require('dotenv').config();
 
 // create connection to our db
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
-  host: 'localhost',
+const sequelize = new Sequelize("heroku_752431466c2cb37", "bd5053c9e62d57", "19015c7a", {
+  host: 'mysql://us-cdbr-east-06.cleardb.net',
   dialect: 'mysql',
   port: 3306
 });
