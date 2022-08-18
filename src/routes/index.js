@@ -1,4 +1,7 @@
+const bodyParser = require('body-parser')
+
 const router = require('express').Router();
+router.use(bodyParser.json())
 
 const apiRoutes = require('./api');
 const authRoutes = require('./auth');
