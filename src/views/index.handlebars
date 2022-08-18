@@ -1,5 +1,79 @@
  {{#if authed}}
-    <h1>You are logged in as {{username}}</h1>
+    <body>
+        <nav class="navbar is-info">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="#">
+                    <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify Favorites tracker" width="112" height="64">
+                </a>
+                <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navbarExampleTransparentExample" class="navbar-menu">
+                <div class="navbar-start is-link">
+                    <a class="navbar-item" href="https://github.com/BulmaTemplates/bulma-templates">
+                        Home
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link" href="/documentation/overview/start/">
+                            Favorites
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <div class="container">
+                                Logged in as {{username}}
+                            
+                                <a class="button is-danger" href="/">
+                                    <span class="icon">
+                                        <i class="fa fa-sign-out"></i>
+                                    </span>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="hero is-info">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                    {{username}}
+                    </h1>
+                    <h2 class="subtitle">
+                    Spotify Favorites
+                    </h2>
+                </div>
+            </div>
+            <div class="tabs is-boxed is-centered main-menu" id="nav">
+                <ul>
+                    <li data-target="pane-1" id="1">
+                        <a>
+                            <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                            <span>Favorites</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane" id="pane-1">
+                   <div class="columns is-centered">
+                        {{> favorites}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     
 {{else}}
     {{> login}}
 {{/if}}
+ 

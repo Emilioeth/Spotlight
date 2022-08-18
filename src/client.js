@@ -1,5 +1,7 @@
 import bulma from "bulma/css/bulma.css";
 import axios from "axios";
+import tabs from "./deps/tabs.js"
+import fas from "font-awesome/css/font-awesome.css"
 
 function entry() {
     
