@@ -14,8 +14,8 @@ const _engine = engine()
   app.engine('handlebars', _engine);
   app.set('view engine', 'handlebars');
   app.set('views', './src/views');
+  app.use(express.static('./src/dist'));
   app.use(routes);
-  app.use(express.static('src/dist'));
   app.use(express.urlencoded({ extended: true }));
   
   

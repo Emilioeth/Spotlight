@@ -3098,11 +3098,16 @@ function entry() {
         loginButton.addEventListener("click",() => {
             axios__WEBPACK_IMPORTED_MODULE_1___default()({
                 method: 'post',
-                url: '/login',
+                url: '/auth/login',
                 data: {
                   email: userNameBox.value,
                   password: pwBox.value
                 }
+              }).then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
               });
         })
     }
@@ -3110,7 +3115,7 @@ function entry() {
         registerButton.addEventListener("click",() => {
             axios__WEBPACK_IMPORTED_MODULE_1___default()({
                 method: 'post',
-                url: '/register',
+                url: '/auth/register',
                 data: {
                   email: userNameBox.value,
                   password: pwBox.value
