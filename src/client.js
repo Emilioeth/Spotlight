@@ -40,5 +40,31 @@ function entry() {
               });
         })
     }
+
+    window.onSpotifyIframeApiReady = (IFrameAPI) => {
+
+      axios({
+        method: 'get',
+        url: '/api/login',
+        data: {
+          email: userNameBox.value,
+          password: pwBox.value
+        }
+      }).then(function (response) {
+        console.log(response);
+        window.location.href = '/';
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+      let element = document.getElementById('embed-iframe');
+      let options = {
+          uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+        };
+      let callback = (EmbedController) => {};
+      IFrameAPI.createController(element, options, callback);
+    };
 }
 entry()
