@@ -21,7 +21,7 @@ router.post('/:id/addfavorite', (req, res) => {
     method: 'get',
     url: `https://api.spotify.com/v1/search?q=${req.body.title}&type=track&limit=1`,
     headers: {
-      'Authorization': process.env.SPOTIFY_TOK,
+      'Authorization': "Bearer BQDhjAjZbqzn5vzii8vOApbHPMsf35jgLT-rT19xCZGD6hfDbc3EHu760vbG5QSCyLJG2WKpPiDL-KbU7UfQjFubCzd4cCPobWyi1fF-JvlHPPS1yMHSod2kOwhBSOxXDLHnkMgK9GiUbAVDl74GNtET7mUhoD8-ydndwwB5AuHGBVsZJnc4_d283-gzIyM",
       'Content-Type': 'application/json'
     }
   }).then(function (response) {
