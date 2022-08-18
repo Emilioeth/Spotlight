@@ -1,38 +1,30 @@
 const router = require('express').Router();
 const { User, Favorites } = require('../../models');
 
-// get all users
+// get all favorites
 router.get('/all', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['password'] }
+  Favorites.findAll({
   })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbFavoritesData => res.json(dbFavoritesData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-//Get single User
+//Get single Favorite
 router.get('/:id', (req, res) => {
-  User.findOne({
-    attributes: { exclude: ['password'] },
+  Favorites.findOne({
     where: {
       id: req.params.id
-    },
-    include: [
-      {
-        model: Favorites,
-        attributes: ['id', 'title', 'song_url', 'user_id']
-      }
-    ]
+    }
   })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+    .then(dbFavoriteData => {
+      if (!dbFavoriteData) {
+        res.status(404).json({ message: 'No favorite found with this id' });
         return;
       }
-      res.json(dbUserData);
+      res.json(dbFavoriteData);
     })
     .catch(err => {
       console.log(err);
@@ -42,19 +34,19 @@ router.get('/:id', (req, res) => {
 
 
 
-//Delete a User
+//Delete a Favorite
 router.delete('/:id', (req, res) => {
-  User.destroy({
+  Favorites.destroy({
     where: {
       id: req.params.id
     }
   })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+    .then(dbFavData => {
+      if (!dbFavData) {
+        res.status(404).json({ message: 'No favorite found with this id' });
         return;
       }
-      res.json(dbUserData);
+      res.json(dbFavData);
     })
     .catch(err => {
       console.log(err);
