@@ -3105,6 +3105,7 @@ function entry() {
                 }
               }).then(function (response) {
                 console.log(response);
+                window.location.href = '/';
               })
               .catch(function (error) {
                 console.log(error);
