@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Favorites } = require('../../models');
 
 //User Sign Up
-router.post('/signup', (req, res) => {
+router.post('/register', (req, res) => {
     User.create({
         username: req.body.username,
         email: req.body.email,
@@ -48,10 +48,6 @@ router.post('/login', (req, res) => {
         req.session.regenerate(function (err) {
             if (err) next(err)
 
-            // store user information in session, typically a user id
-            req.session.user = dbUserData
-            req.session.user.password = ''
-
             // save the session before redirection to ensure page
             // load does not happen before session is saved
             req.session.save(function (err) {
@@ -59,6 +55,7 @@ router.post('/login', (req, res) => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
+                
                 res.json({ user: dbUserData, message: 'You are now logged in!' });
             })
         })

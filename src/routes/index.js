@@ -26,9 +26,10 @@ router.use('/api', apiRoutes);
 router.use('/auth', authRoutes);
 
 router.use('/', (req, res, next) => {
-    if (req?.session?.user) {
+    if (req?.session?.loggedIn) {
         res.render('index', {
-            authed: true
+            authed: true,
+            username: req.session.username
         });
     }
     else next()
