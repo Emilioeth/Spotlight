@@ -1,64 +1,43 @@
+const bodyParser = require('body-parser')
+
 const router = require('express').Router();
-const { User, Favorites } = require('../../models');
+router.use(bodyParser.json())
 
-// get all users
-router.get('/all', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['password'] }
+const apiRoutes = require('./api');
+const authRoutes = require('./auth');
+
+const session = require('express-session');
+const sequelize = require('../config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const sess = {
+  secret: 'Password Social Music App',
+  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
   })
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+};
 
-//Get single User
-router.get('/:id', (req, res) => {
-  User.findOne({
-    attributes: { exclude: ['password'] },
-    where: {
-      id: req.params.id
-    },
-    include: [
-      {
-        model: Favorites,
-        attributes: ['id', 'title', 'song_url', 'user_id']
-      }
-    ]
-  })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+sequelize.sync({ force: false });
+router.use(session(sess));
+router.use('/api', apiRoutes);
+router.use('/auth', authRoutes);
 
-
-
-//Delete a User
-router.delete('/:id', (req, res) => {
-  User.destroy({
-    where: {
-      id: req.params.id
+router.use('/', (req, res, next) => {
+    if (req?.session?.loggedIn) {
+        res.render('index', {
+            authed: true,
+            username: req.session.username
+        });
     }
-  })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
+    else next()
+});
+
+router.use('/', (req, res) => {
+    res.render('index', {
+        authed: false
     });
 });
 
