@@ -4,7 +4,7 @@ const { User, Favorites } = require('../../models');
 //User Sign Up
 router.post('/register', (req, res) => {
     User.create({
-        username: req.body.username,
+        username: req.body.email,
         email: req.body.email,
         password: req.body.password
     })
