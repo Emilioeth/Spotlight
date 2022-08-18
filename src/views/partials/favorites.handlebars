@@ -1,37 +1,14 @@
 <section class="hero is-primary ">
+  <div id="user-data" data-id="{{user_id}}" style="display: none;"></div>
   <div class="hero-body">
     <div class="container">
-
-      <div class="columns is-centered">
-            <div class="column ">
-              <div class="card">
-                <div class="card-content">
-                  <div id="embed-iframe">
-                      <iframe 
-                      style="border-radius:12px" src="https://open.spotify.com/embed/track/{{favorites.url}}?utm_source=generator" width="100%" height="80" 
-                      frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                      </iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="columns is-fluid">
+        <input id="searchTextInput" class="input" type="text" placeholder="Text input">
+        <button id="searchAddBtn" class="button is-info">Add song</button>
       </div>
-
-      <div class="columns is-centered">
-            <div class="column ">
-              <div class="card">
-                <div class="card-content">
-                  <div id="embed-iframe">
-                      <iframe 
-                      style="border-radius:12px" src="https://open.spotify.com/embed/track/{{favories.url}}?utm_source=generator" width="100%" height="80" 
-                      frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                      </iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>
-
+      {{#each trackList}}
+        {{>trackembed dataValues}}
+      {{/each}}
     </div>
   </div>
 </section>

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Favorites } = require('../../../models');
+const axios = require('axios')
 
 // get all users
 router.get('/all', (req, res) => {
@@ -15,17 +16,38 @@ router.get('/all', (req, res) => {
 
 // add a favorite for a user
 router.post('/:id/addfavorite', (req, res) => {
-  Favorites.create({
-    title: req.body.title,
-    song_url: req.body.url,
-    owner_id: req.params.id
-})
-    .then(dbFavoriteData => {
-          res.json(dbFavoriteData);
+
+  axios({
+    method: 'get',
+    url: `https://api.spotify.com/v1/search?q=${req.body.title}&type=track&limit=1`,
+    headers: {
+      'Authorization': process.env.SPOTIFY_TOK,
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    const track = response.data.tracks.items[0]
+    const favorite_save = {
+      title: `${track.artists[0].name} - ${track.name}`,
+      artist: track.artists[0].name,
+      album: track.album.name,
+      id: track.id
+    }
+    Favorites.create({
+      title: favorite_save.title,
+      song_id: favorite_save.id,
+      owner_id: req.params.id
     })
-    .catch(err => {
+      .then(dbFavoriteData => {
+        res.json(dbFavoriteData);
+      })
+      .catch(err => {
         console.log(err);
         res.status(500).json(err);
+      });
+
+  })
+    .catch(function (error) {
+      console.log(error);
     });
 });
 
@@ -39,7 +61,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Favorites,
-        attributes: ['id', 'title', 'song_url', 'owner_id'],
+        attributes: ['id', 'title', 'song_id', 'owner_id'],
       }
     ]
   })
