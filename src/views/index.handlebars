@@ -1,5 +1,5 @@
- {{#if loggedIn}}
-    <h1>You are logged in</h1>
+ {{#if authed}}
+    <h1>You are logged in as {{username}}</h1>
 {{else}}
-    <h1>You are not logged in</h1>
+    {{> login}}
 {{/if}}
