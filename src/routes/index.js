@@ -29,7 +29,8 @@ router.use('/', (req, res, next) => {
     if (req?.session?.loggedIn) {
         res.render('index', {
             authed: true,
-            username: req.session.username
+            username: req.session.username,
+            trackList: [{"url": "test"},{"url": "test"},{"url": "test"}]
         });
     }
     else next()
