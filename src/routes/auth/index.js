@@ -25,6 +25,7 @@ router.post('/signup', (req, res) => {
 
 //Auth Log-in
 router.post('/login', (req, res) => {
+
     console.log("hit /login")
     User.findOne({
         where: {
@@ -42,14 +43,25 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
+        // regenerate the session, which is good practice to help
+        // guard against forms of session fixation
+        req.session.regenerate(function (err) {
+            if (err) next(err)
 
-        req.session.save(() => {
-            req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
-            req.session.loggedIn = true;
+            // store user information in session, typically a user id
+            req.session.user = dbUserData
+            req.session.user.password = ''
 
-            res.json({ user: dbUserData, message: 'You are now logged in!' });
-        });
+            // save the session before redirection to ensure page
+            // load does not happen before session is saved
+            req.session.save(function (err) {
+                if (err) return next(err)
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
+                res.json({ user: dbUserData, message: 'You are now logged in!' });
+            })
+        })
     });
 });
 
