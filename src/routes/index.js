@@ -9,6 +9,7 @@ const authRoutes = require('./auth');
 const session = require('express-session');
 const sequelize = require('../config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const { User, Favorites } = require('../models');
 
 const sess = {
   secret: 'Password Social Music App',
@@ -25,13 +26,39 @@ router.use(session(sess));
 router.use('/api', apiRoutes);
 router.use('/auth', authRoutes);
 
+function getTrackListForUser(username){
+
+}
+
 router.use('/', (req, res, next) => {
     if (req?.session?.loggedIn) {
-        res.render('index', {
-            authed: true,
-            username: req.session.username,
-            trackList: [{"url": "test"},{"url": "test"},{"url": "test"}]
-        });
+        User.findOne({
+            attributes: { exclude: ['password'] },
+            where: {
+              id: req.session.user_id
+            },
+            include: [
+              {
+                model: Favorites,
+                attributes: ['id', 'title', 'song_url', 'owner_id'],
+              }
+            ]
+          })
+            .then(dbUserData => {
+              if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+              }
+              res.render('index', {
+                authed: true,
+                username: req.session.username,
+                trackList: dbUserData.favorites
+            });
+            })
+            .catch(err => {
+              console.log(err);
+              res.status(500).json(err);
+            });
     }
     else next()
 });
