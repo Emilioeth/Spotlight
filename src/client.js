@@ -6,6 +6,7 @@ import fas from "font-awesome/css/font-awesome.css"
 function entry() {
 
   const loginButton = document.querySelector("#loginButton")
+  const logoutButton = document.querySelector("#logoutButton")
   const registerButton = document.querySelector("#registerButton")
   const userNameBox = document.querySelector('#username')
   const pwBox = document.querySelector('#password')
@@ -38,6 +39,17 @@ function entry() {
           password: pwBox.value
         }
       });
+    })
+  }
+  if (logoutButton) {
+    logoutButton.addEventListener("click", () => {
+      axios({
+        method: 'post',
+        url: '/auth/logout',
+      });
+      setTimeout(function(){
+        window.location.reload();
+     }, 500);
     })
   }
 

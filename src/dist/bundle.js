@@ -3405,6 +3405,7 @@ __webpack_require__.r(__webpack_exports__);
 function entry() {
 
   const loginButton = document.querySelector("#loginButton")
+  const logoutButton = document.querySelector("#logoutButton")
   const registerButton = document.querySelector("#registerButton")
   const userNameBox = document.querySelector('#username')
   const pwBox = document.querySelector('#password')
@@ -3437,6 +3438,17 @@ function entry() {
           password: pwBox.value
         }
       });
+    })
+  }
+  if (logoutButton) {
+    logoutButton.addEventListener("click", () => {
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'post',
+        url: '/auth/logout',
+      });
+      setTimeout(function(){
+        window.location.reload();
+     }, 500);
     })
   }
 
