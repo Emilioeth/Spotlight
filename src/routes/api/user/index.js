@@ -13,6 +13,22 @@ router.get('/all', (req, res) => {
     });
 });
 
+// add a favorite for a user
+router.post('/:id/addfavorite', (req, res) => {
+  Favorites.create({
+    title: req.body.title,
+    song_url: req.body.url,
+    owner_id: req.params.id
+})
+    .then(dbFavoriteData => {
+          res.json(dbFavoriteData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 //Get single User
 router.get('/:id', (req, res) => {
   User.findOne({
@@ -23,7 +39,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Favorites,
-        attributes: ['id', 'title', 'song_url', 'user_id']
+        attributes: ['id', 'title', 'song_url', 'owner_id'],
       }
     ]
   })
