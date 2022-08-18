@@ -26,10 +26,6 @@ router.use(session(sess));
 router.use('/api', apiRoutes);
 router.use('/auth', authRoutes);
 
-function getTrackListForUser(username){
-
-}
-
 router.use('/', (req, res, next) => {
     if (req?.session?.loggedIn) {
         User.findOne({
@@ -40,7 +36,7 @@ router.use('/', (req, res, next) => {
             include: [
               {
                 model: Favorites,
-                attributes: ['id', 'title', 'song_url', 'owner_id'],
+                attributes: ['id', 'title', 'song_id', 'owner_id'],
               }
             ]
           })
@@ -52,7 +48,8 @@ router.use('/', (req, res, next) => {
               res.render('index', {
                 authed: true,
                 username: req.session.username,
-                trackList: dbUserData.favorites
+                trackList: dbUserData.favorites,
+                user_id: req.session.user_id
             });
             })
             .catch(err => {

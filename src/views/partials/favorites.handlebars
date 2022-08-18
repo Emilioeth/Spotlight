@@ -1,7 +1,12 @@
 <section class="hero is-primary ">
+  <div id="user-data" data-id="{{user_id}}" style="display: none;"></div>
   <div class="hero-body">
     <div class="container">
-      {{#each this}}
+      <div class="columns is-fluid">
+        <input id="searchTextInput" class="input" type="text" placeholder="Text input">
+        <button id="searchAddBtn" class="button is-info">Add song</button>
+      </div>
+      {{#each trackList}}
         {{>trackembed dataValues}}
       {{/each}}
     </div>

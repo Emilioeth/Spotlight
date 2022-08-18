@@ -16,12 +16,9 @@ Favorites.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        song_url: {
+        song_id: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isURL: true
-            }
         },
         owner_id: {
             type: DataTypes.INTEGER,
