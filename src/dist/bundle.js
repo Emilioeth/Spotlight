@@ -3464,28 +3464,13 @@ function entry() {
         title: searchInput.value
       }
     }).then((response) => {
-      console.log(response)
-      window.location.href = '/';
+      setTimeout(function(){
+        window.location.reload();
+     }, 500);
     })
   })
 
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
-
-    axios__WEBPACK_IMPORTED_MODULE_1___default()({
-      method: 'get',
-      url: '/api/login',
-      data: {
-        email: userNameBox.value,
-        password: pwBox.value
-      }
-    }).then(function (response) {
-      console.log(response);
-      window.location.href = '/';
-    })
-      .catch(function (error) {
-        console.log(error);
-      });
-
 
     let element = document.getElementById('embed-iframe');
     let options = {
