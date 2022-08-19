@@ -3420,8 +3420,9 @@ function entry() {
           password: pwBox.value
         }
       }).then(function (response) {
-        console.log(response);
-        window.location.href = '/';
+        setTimeout(function(){
+          window.location.reload();
+       }, 500);
       })
         .catch(function (error) {
           console.log(error);
@@ -3437,7 +3438,11 @@ function entry() {
           email: userNameBox.value,
           password: pwBox.value
         }
-      });
+      }).then(() =>{
+        setTimeout(function(){
+          window.location.reload();
+       }, 500);
+      })
     })
   }
   if (logoutButton) {
@@ -3454,8 +3459,9 @@ function entry() {
 
   const doAddSearchBtn = document.querySelector("#searchAddBtn")
   const searchInput = document.querySelector("#searchTextInput")
-
-  const userId = document.querySelector("#user-data").dataset.id
+  
+  if(doAddSearchBtn){
+    const userId = document.querySelector("#user-data").dataset?.id
   doAddSearchBtn.addEventListener("click", () => {
     axios__WEBPACK_IMPORTED_MODULE_1___default()({
       method: 'post',
@@ -3469,16 +3475,9 @@ function entry() {
      }, 500);
     })
   })
+}
 
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-
-    let element = document.getElementById('embed-iframe');
-    let options = {
-      uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
-    };
-    let callback = (EmbedController) => { };
-    IFrameAPI.createController(element, options, callback);
-  };
+  
 }
 entry()
 })();
