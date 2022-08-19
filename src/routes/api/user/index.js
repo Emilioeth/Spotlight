@@ -21,7 +21,7 @@ router.post('/:id/addfavorite', (req, res) => {
     method: 'get',
     url: `https://api.spotify.com/v1/search?q=${req.body.title}&type=track&limit=1`,
     headers: {
-      'Authorization': "Bearer BQBUhGO-hAKcxteTAC2UaYALk-eHO5oQiNLfevTmUbJnRFcuhMqMqyxcGbbFs_cm_hrqvculqefSAFzm1qWOERyClKGgdB8y9NSulp_qoaOLObgjoqt2qJOVv1Kkmz6DTIgCTb5bn1awL40HcAJ4yJam6X-0R0O8DJAtijDBo3UfpG8U_SOMi8QLNqmkXIE",
+      'Authorization': "Bearer BQAhsEJgJS_0jM38TRLfbSeW5JyubdrU9mXPGbAWuRb6YsLifQ8Pi7ZX_v5Tt7-GAt_zsHnPt_zuuPjDsWVpelbQMmBiQMsHG9fzSEKKjMVfYvQvMF4H5F3AWdK0h6amTfMO4-SNA5opXOFQVHJC0-naWNiM8LmSQXbkZ2IJoltZ1jXXECDD16WhX135DzU",
       'Content-Type': 'application/json'
     }
   }).then(function (response) {
