@@ -1,7 +1,7 @@
 
   ![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Roboto+Condensed&size=30&pause=2000&color=0078D6&width=435&lines=Spotlight;By+Rush+B)
 
-  ![Project Img](/imgs/readmeIMG.png)
+  ![Project Img](/imgs/readmeIMG.png.png)
   
   ## Description
   Spotlight is a an app that lets you add your favorite spotify songs to your profile, you can register and save your songs so that every time you log in you have your list of song saved. Future features will include sharing your profile with your friends, a dashboard view and more.\
